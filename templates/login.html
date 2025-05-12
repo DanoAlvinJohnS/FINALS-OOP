@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Full page background image */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{{ url_for("static", filename="images/food.jpg") }}');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Centering the login form */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Login box styling */
+        .login-box {
+            background-color: rgba(0, 0, 0, 0.5); /* Black with transparency */
+            padding: 30px;
+            border-radius: 15px;
+            width: 500px; /* Adjust width */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Styling for the input fields */
+        .login-box input {
+            margin-bottom: 15px;
+            padding: 10px;
+            width: 96%;
+            border-radius: 5px;
+            border: none;
+        }
+
+        /* Flash message styling */
+        .alert {
+            margin-bottom: 20px;
+            color: red;
+        }
+
+        /* Header styling */
+        h2 {
+            color: white;
+            text-align: center;
+        }
+
+        /* Label styling */
+        label {
+            color: white;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px; 
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form method="POST" action="/login">
+                <div class="alert"> <!-- This will display login errors if any -->
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <ul>
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button class="btn-primary" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
