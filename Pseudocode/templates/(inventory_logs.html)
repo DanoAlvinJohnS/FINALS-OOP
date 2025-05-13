@@ -1,0 +1,26 @@
+BEGIN
+    DISPLAY title "📦 Inventory Logs"
+    
+    DISPLAY a link to navigate back to Admin Orders page
+    
+    IF there are no logs in the inventory (logs is empty)
+        DISPLAY message: "No inventory logs found"
+    ELSE
+        CREATE a table to display the inventory logs
+        BEGIN Table Structure:
+            FOR each column in the logs (EXCLUDE 'Image Path')
+                CREATE a header (th) with the column name
+            END for
+        END Table Structure
+        
+        BEGIN Table Body:
+            FOR each row in the logs (i.e., for each inventory item)
+                BEGIN row:
+                    FOR each column in the logs (EXCLUDE 'Image Path')
+                        DISPLAY the value of that column for the current row (i.e., logs.iloc[i][column])
+                    END for
+                END row
+            END for
+        END Table Body
+    END IF
+END
