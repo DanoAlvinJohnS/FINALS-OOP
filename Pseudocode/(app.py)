@@ -1,0 +1,76 @@
+START
+
+DECLARE APP as Flask
+
+SET the secret_key for session security
+
+SET file paths for:
+    - User file (users.xlsx)
+    - Inventory logs (inventory_logs.xlsx)
+    - Inventory file (inventory.xlsx)
+    - Order file (food system.xlsx)
+
+DEFINE function 'load_users' to:
+    - Check if the user file exists
+    - If file exists, load data from the file (if it contains 'username', 'password', 'admin')
+    - Return user data in dictionary format
+    - If there's an error or missing columns, return empty dictionary
+
+LOAD users from 'load_users'
+
+DEFINE function 'load_orders' to:
+    - Check if the order file exists
+    - If file exists, load data from the file and clean up the columns
+    - Add missing columns if necessary
+    - Normalize and calculate required values (e.g., 'Price', 'Quantity', 'Total Price')
+    - Return cleaned orders data
+
+DEFINE function '_deduplicate_columns' to:
+    - Ensure column names are unique by appending numbers to duplicates
+
+DEFINE route for home ('/') to:
+    - Check if user is logged in (session exists)
+    - If logged in, render the home page with username and admin status
+    - If not logged in, redirect to login page
+
+DEFINE route for inventory logs ('/inventory_logs') to:
+    - Check if the inventory logs file exists
+    - If exists, load and display logs
+    - If not, display empty logs
+
+DEFINE route for admin orders ('/admin/admin_orders') to:
+    - Load and display orders using 'load_orders' function
+
+DEFINE route for finishing an order ('/admin/finish_order') to:
+    - Receive order details (user, order_id, status)
+    - Validate and process order status
+    - If status is "Completed", deduct inventory quantities
+    - Log inventory changes in inventory logs file
+    - Save changes to order file, inventory file, and inventory logs file
+
+DEFINE route for checkout ('/checkout') to:
+    - Receive cart data and validate order ID
+    - Process cart items and calculate total price for each item
+    - Save new order data to the order file
+
+DEFINE route for completing an order ('/complete_order') to:
+    - Process completed orders by deducting inventory quantities
+    - Log completed orders in the inventory logs file
+    - Remove the completed order from the order file
+
+DEFINE route for updating order status ('/update_order_status') to:
+    - Receive order ID and new status
+    - Update order status in the order file
+
+DEFINE route for login ('/login') to:
+    - Receive login credentials (username, password)
+    - Validate the credentials against the user data
+    - Set session data (username and admin status) upon successful login
+    - Redirect to home page
+
+DEFINE route for logout ('/logout') to:
+    - Clear session data and redirect to login page
+
+IF the app is running, start the Flask server
+
+END
