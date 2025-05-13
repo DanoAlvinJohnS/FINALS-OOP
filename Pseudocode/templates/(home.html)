@@ -1,0 +1,63 @@
+Start
+
+1. **On Page Load:**
+   - Check if user is logged in.
+     - If logged in, display username.
+     - If not logged in, display "Login/Register" button.
+   - Display food menu with item details (name, price, image).
+   - Check if user is admin.
+     - If admin, display "Go to Admin Panel" link.
+   - Initialize an empty cart or retrieve cart data from local storage.
+
+2. **When a Food Item is Clicked:**
+   - Open a modal showing food item details (name, price, image).
+   - Show quantity options (+ and - buttons).
+   - Display "Add to Cart" button.
+
+3. **When "Add to Cart" Button is Clicked:**
+   - Retrieve item details: name, price, image, quantity.
+   - Check if item is already in the cart:
+     - If item exists:
+       - Increase item quantity by the amount of the user selected.
+       - Update item total price based on new quantity.
+     - If item does not exist:
+       - Add item to the cart.
+   - Save cart data to local storage.
+   - Update cart display on page.
+
+4. **When "Cart" Button is Clicked:**
+   - Show or hide the cart panel.
+   - If cart is not empty, display cart items (name, price, quantity, image, total price).
+   - Provide an option to remove items from the cart.
+
+5. **When Item Quantity is Adjusted in Cart:**
+   - If "+" button is clicked, increase item quantity.
+   - If "-" button is clicked, decrease item quantity (ensure quantity > 0).
+   - Update the total price of the item based on quantity.
+   - Save updated cart to local storage.
+   - Refresh cart display with new quantities and prices.
+
+6. **When an Item is Removed from the Cart:**
+   - If "Remove" button (X) is clicked, remove item from cart.
+   - Update cart in local storage.
+   - Refresh the cart display.
+
+7. **When "Checkout" Button is Clicked:**
+   - Check if the cart is empty:
+     - If cart is empty, display alert: "Your cart is empty."
+     - If cart is not empty:
+       - Generate a unique order ID.
+       - Prepare order details (items, quantities, total price).
+       - Send order details to server via POST request.
+       - If order is successfully processed:
+         - Clear the cart.
+         - Update cart display to reflect empty cart.
+       - If there’s an error during order processing:
+         - Display an error message to the user.
+
+8. **Backend (Flask) Flow:**
+   - Receive checkout request from frontend.
+   - Process the order (store in database or order log).
+   - Respond with success or error message to frontend.
+
+End
