@@ -1,0 +1,42 @@
+Start
+
+1. **Page Initialization:**
+   - Set page title to "Admin Orders".
+   - Set page font to 'Inter'.
+   - Apply background color and padding to body.
+
+2. **Display Title:**
+   - Display "🛠 Admin Panel - Orders".
+
+3. **Check if Orders Exist:**
+   - If no orders are available:
+     - Display "No orders found."
+   - If orders are present:
+     - Create a table with headers: User, Order ID, Item Name, Quantity, Price, Total Price, Timestamp, and Status.
+
+4. **Loop Through Orders:**
+   - Loop through each unique user in the orders list:
+     - For each user, filter and get all orders related to that user.
+     - Calculate the total price for that user.
+     - For each order, create a new row in the table:
+       - Display user, order ID, item name, quantity, price, total price, and timestamp.
+       - Display a dropdown for changing the order status:
+         - Available statuses are "Waiting for payment", "Failed order", "On going", and "Ready for pick up".
+         - Highlight the current status with the corresponding color.
+         - Allow admin to update status by selecting a new option from the dropdown and submitting the form.
+       - Display a "Completed" button to mark the order as completed.
+
+5. **Update Row Color Based on Status:**
+   - When the status dropdown is changed:
+     - Update the row color based on the selected status (using JavaScript function).
+
+6. **Show Total Price for Each User:**
+   - After each user’s orders, display the total price for that user in a bold row.
+
+7. **Link Back to Home Page:**
+   - Provide a link to go back to the home page.
+
+8. **Link to Inventory Logs:**
+   - Provide a link to view inventory logs.
+
+End
